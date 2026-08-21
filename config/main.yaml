@@ -1,0 +1,190 @@
+system:
+  language: en
+paths:
+  user_data_dir: ./data/user
+  knowledge_bases_dir: ./data/knowledge_bases
+  user_log_dir: ./data/user/logs
+  performance_log_dir: ./data/user/performance
+  guide_output_dir: ./data/user/guide
+  research_output_dir: ./data/user/research/cache
+  research_reports_dir: ./data/user/research/reports
+  solve_output_dir: ./data/user/solve
+  teacher_output_dir: ./data/user/teacher
+tools:
+  rag_tool:
+    kb_base_dir: ./data/knowledge_bases
+    default_kb: ai_textbook
+  run_code:
+    workspace: ./data/user/run_code_workspace
+    allowed_roots:
+    - ./data/user
+    - ./src/tools
+  web_search:
+    enabled: true
+    consolidation: template
+    consolidation_template: ''
+    provider: jina
+  query_item:
+    enabled: true
+    max_results: 5
+logging:
+  # Global log level for the entire system (DEBUG, INFO, WARNING, ERROR)
+  # This controls both ThinkPilot logs and RAG module logs
+  level: DEBUG
+  save_to_file: true
+  console_output: true
+  # RAG module logger name mapping (optional customization)
+  rag_logger_names:
+    knowledge_init: RAG-Init
+    rag_tool: RAG
+solve:
+  max_solve_correction_iterations: 3
+  enable_citations: true
+  save_intermediate_results: true
+  orchestration:
+    # mode: auto | fast | balanced | deep
+    mode: auto
+    profiles:
+      fast:
+        use_note_agent: false
+        use_manager_agent: false
+        use_precision_agent: false
+        max_analysis_iterations: 2
+        note_min_new_knowledge: 999
+      balanced:
+        use_note_agent: true
+        use_manager_agent: true
+        use_precision_agent: false
+        max_analysis_iterations: 4
+        note_min_new_knowledge: 1
+      deep:
+        use_note_agent: true
+        use_manager_agent: true
+        use_precision_agent: true
+        max_analysis_iterations: 6
+        note_min_new_knowledge: 1
+  # Valid tools for investigate agent validation
+  valid_tools:
+    - "rag_naive"
+    - "rag_hybrid"
+    - "web_search"
+    - "query_item"
+    - "none"
+  agents:
+    investigate_agent:
+      max_actions_per_round: 2
+      max_iterations: 4
+    precision_answer_agent:
+      enabled: true
+teacher:
+  session_store: ./data/user/teacher
+  default_mode: explain-first
+  valid_tools:
+    - rag_hybrid
+    - rag_naive
+    - none
+subjects:
+  default: science
+  liberal_arts:
+    kb_name: ""
+    knowledge_base_paths: []
+    valid_tools:
+      - rag_hybrid
+      - none
+    default_behavior: explain-first
+  science:
+    kb_name: "数理统计"
+    knowledge_base_paths:
+      - ./data/knowledge_bases/数理统计
+    valid_tools:
+      - rag_hybrid
+      - rag_naive
+      - none
+    default_behavior: explain-first
+  engineering:
+    kb_name: "算法设计"
+    knowledge_base_paths:
+      - ./data/knowledge_bases/算法设计
+    valid_tools:
+      - rag_hybrid
+      - rag_naive
+      - none
+    default_behavior: solve-first
+research:
+  planning:
+    rephrase:
+      enabled: true
+      max_iterations: 3
+    decompose:
+      enabled: true
+      mode: auto
+      initial_subtopics: 5
+      auto_max_subtopics: 8
+  researching:
+    max_iterations: 5
+    new_topic_min_score: 0.85
+    execution_mode: series
+    max_parallel_topics: 1
+    enable_rag_naive: true
+    enable_rag_hybrid: true
+    enable_paper_search: true
+    enable_web_search: true
+    enable_run_code: true
+    tool_timeout: 60
+    tool_max_retries: 2
+    paper_search_years_limit: 3
+  reporting:
+    min_section_length: 800
+    enable_citation_list: true
+    enable_inline_citations: false
+  rag:
+    kb_name: DE-all
+    default_mode: hybrid
+    fallback_mode: naive
+  queue:
+    max_length: 5
+  presets:
+    quick:
+      description: Quick mode - fast research with minimal depth
+      planning:
+        decompose:
+          mode: manual
+          initial_subtopics: 1
+      researching:
+        max_iterations: 1
+        iteration_mode: fixed
+      reporting:
+        min_section_length: 300
+    medium:
+      description: Medium mode - balanced research depth
+      planning:
+        decompose:
+          mode: manual
+          initial_subtopics: 5
+      researching:
+        max_iterations: 4
+        iteration_mode: fixed
+      reporting:
+        min_section_length: 500
+    deep:
+      description: Deep mode - thorough research with maximum depth
+      planning:
+        decompose:
+          mode: manual
+          initial_subtopics: 8
+      researching:
+        max_iterations: 7
+        iteration_mode: fixed
+      reporting:
+        min_section_length: 800
+    auto:
+      description: Auto mode - agent decides depth within limits
+      planning:
+        decompose:
+          mode: auto
+          auto_max_subtopics: 8
+      researching:
+        max_iterations: 6
+        iteration_mode: flexible
+      reporting:
+        min_section_length: 500

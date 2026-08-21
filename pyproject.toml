@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "thinkpilot"
+version = "0.2.0"
+description = "ThinkPilot full-stack AI learning platform"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "ThinkPilot" }]
+license = { text = "AGPL-3.0-only" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["web/node_modules", "web/.next", "data/user"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+extend-exclude = '''
+/(web/node_modules|web/.next|data/user)/
+'''

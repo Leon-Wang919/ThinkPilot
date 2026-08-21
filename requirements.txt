@@ -1,0 +1,7 @@
+# Aggregate installer that preserves the old one-command workflow.
+# Use the split files under requirements/ when you only need a subset.
+-r requirements/base.txt
+-r requirements/rag.txt
+-r requirements/ocr.txt
+-r requirements/ml.txt
+-r requirements/dev.txt

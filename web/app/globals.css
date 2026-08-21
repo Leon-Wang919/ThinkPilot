@@ -1,0 +1,870 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 221.2 83.2% 53.3%;
+
+    --brand: 221.2 83.2% 53.3%;
+    --brand-soft: 214 100% 97%;
+    --brand-strong: 221.2 83.2% 45%;
+    --brand-pressed: 221.2 83.2% 35%;
+    --panel: 0 0% 100%;
+    --panel-foreground: 0 0% 9%;
+    --panel-muted: 0 0% 98%;
+    --panel-border: 0 0% 93%;
+    --shell-top: 0 0% 100%;
+    --shell-bottom: 0 0% 98%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 217.2 91.2% 59.8%;
+
+    --brand: 217.2 91.2% 59.8%;
+    --brand-soft: 221 39% 11%;
+    --brand-strong: 217.2 91.2% 70%;
+    --brand-pressed: 217.2 91.2% 50%;
+    --panel: 0 0% 6%;
+    --panel-foreground: 0 0% 98%;
+    --panel-muted: 0 0% 12%;
+    --panel-border: 0 0% 14.9%;
+    --shell-top: 0 0% 3.9%;
+    --shell-bottom: 0 0% 2%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family:
+      "SF Pro Text",
+      "SF Pro Display",
+      "Segoe UI",
+      "PingFang SC",
+      "Hiragino Sans GB",
+      "Noto Sans CJK SC",
+      "Microsoft YaHei",
+      system-ui,
+      sans-serif;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+}
+
+@layer components {
+  .tp-page {
+    @apply mx-auto flex h-full w-full max-w-[1680px] min-h-0 flex-col gap-4 px-5 py-5;
+  }
+
+  .tp-page-header {
+    @apply rounded-[26px] border px-5 py-3.5 md:px-6 md:py-4;
+    border-color: hsl(var(--panel-border) / 0.9);
+    background:
+      linear-gradient(135deg, hsl(var(--panel)) 0%, hsl(var(--panel-muted) / 0.92) 100%);
+    box-shadow: 0 20px 64px -42px rgba(15, 23, 42, 0.3);
+  }
+
+  .tp-panel {
+    @apply flex min-h-0 flex-col overflow-hidden rounded-[26px] border;
+    border-color: hsl(var(--panel-border) / 0.9);
+    background: hsl(var(--panel) / 0.96);
+    box-shadow: 0 20px 64px -42px rgba(15, 23, 42, 0.24);
+    backdrop-filter: blur(16px);
+  }
+
+  .tp-panel-muted {
+    background:
+      linear-gradient(180deg, hsl(var(--panel)) 0%, hsl(var(--panel-muted) / 0.92) 100%);
+  }
+
+  .tp-composer {
+    @apply overflow-hidden rounded-[26px] border;
+    border-color: hsl(var(--panel-border));
+    background: hsl(var(--panel) / 0.96);
+    box-shadow: 0 20px 54px -40px rgba(15, 23, 42, 0.32);
+  }
+
+  .tp-composer-input {
+    @apply w-full resize-none border-0 bg-transparent px-4 py-3.5 text-sm text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] focus:outline-none focus:ring-0;
+  }
+
+  .tp-badge {
+    @apply inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[11px] font-medium;
+    border-color: hsl(var(--panel-border));
+    background: hsl(var(--panel-muted) / 0.9);
+    color: hsl(var(--muted-foreground));
+  }
+
+  .tp-kbd {
+    @apply inline-flex items-center rounded-lg border px-2 py-1 text-[10px] font-medium;
+    border-color: hsl(var(--panel-border));
+    background: hsl(var(--panel) / 0.95);
+    color: hsl(var(--muted-foreground));
+  }
+
+  .dark .tp-page-header {
+    border-color: hsl(var(--panel-border) / 0.95);
+    background:
+      linear-gradient(180deg, hsl(var(--panel) / 0.98) 0%, hsl(var(--panel-muted) / 0.96) 100%);
+    box-shadow: 0 22px 60px -44px rgba(2, 6, 23, 0.85);
+  }
+
+  .dark .tp-panel {
+    border-color: hsl(var(--panel-border) / 0.95);
+    background: hsl(var(--panel) / 0.98);
+    box-shadow: 0 24px 72px -48px rgba(2, 6, 23, 0.92);
+  }
+
+  .dark .tp-panel-muted {
+    background:
+      linear-gradient(180deg, hsl(var(--panel) / 0.99) 0%, hsl(var(--panel-muted) / 0.98) 100%);
+  }
+
+  .dark .tp-composer {
+    border-color: hsl(var(--panel-border) / 0.95);
+    background: hsl(var(--panel) / 0.985);
+    box-shadow: 0 22px 64px -44px rgba(2, 6, 23, 0.88);
+  }
+
+  .dark .tp-badge {
+    background: hsl(var(--panel-muted) / 0.98);
+    color: hsl(var(--foreground) / 0.88);
+  }
+
+  .dark .tp-kbd {
+    background: hsl(var(--panel-muted) / 0.96);
+    color: hsl(var(--foreground) / 0.86);
+  }
+}
+
+/* Markdown Styles */
+.prose pre {
+  @apply bg-slate-950 text-slate-50 rounded-lg p-4 overflow-x-auto my-4;
+}
+
+.dark .prose pre {
+  @apply bg-slate-950/95 text-slate-100 border border-slate-800;
+}
+
+.prose code {
+  @apply bg-slate-100 text-slate-900 px-1.5 py-0.5 rounded text-sm font-mono;
+}
+
+.dark .prose code {
+  @apply bg-slate-800 text-slate-100;
+}
+
+.prose pre code {
+  @apply bg-transparent text-inherit p-0;
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+  @apply font-semibold tracking-tight text-slate-900 mt-8 mb-4;
+}
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3 {
+  @apply text-slate-100;
+}
+
+.prose p {
+  @apply leading-7 mb-4 text-slate-700;
+}
+
+.dark .prose p {
+  @apply text-slate-300;
+}
+
+.prose ul {
+  @apply list-disc list-outside ml-6 mb-4 text-slate-700;
+}
+
+.dark .prose ul {
+  @apply text-slate-300;
+}
+
+.prose ol {
+  @apply list-decimal list-outside ml-6 mb-4 text-slate-700;
+}
+
+.dark .prose ol {
+  @apply text-slate-300;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-blue-500 pl-4 italic my-4 text-slate-600;
+}
+
+.dark .prose blockquote {
+  @apply text-slate-400 border-blue-400;
+}
+
+.prose a {
+  @apply text-blue-600 hover:text-blue-700 underline;
+}
+
+.dark .prose a {
+  @apply text-blue-400 hover:text-blue-300;
+}
+
+/* Prose strong/bold */
+.prose strong {
+  @apply text-slate-900 font-semibold;
+}
+
+.dark .prose strong {
+  @apply text-slate-100;
+}
+
+/* KaTeX Styles for Dark Mode */
+.dark .katex {
+  color: #e2e8f0;
+}
+
+.dark .katex .mord,
+.dark .katex .mbin,
+.dark .katex .mrel,
+.dark .katex .mopen,
+.dark .katex .mclose,
+.dark .katex .mpunct,
+.dark .katex .minner,
+.dark .katex .mop {
+  color: #e2e8f0;
+}
+
+/* Tables in dark mode */
+.prose table {
+  @apply border-collapse;
+}
+
+.prose th {
+  @apply bg-slate-100 text-slate-900 font-semibold px-4 py-2 border border-slate-200;
+}
+
+.dark .prose th {
+  @apply bg-slate-700 text-slate-100 border-slate-600;
+}
+
+.prose td {
+  @apply px-4 py-2 border border-slate-200 text-slate-700;
+}
+
+.dark .prose td {
+  @apply border-slate-600 text-slate-300;
+}
+
+/* Custom Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+/* Rough Notation - Handwritten style annotations */
+.rough-notation-container {
+  /* Ensure SVG filters are available */
+}
+
+.rough-notation {
+  display: inline;
+  position: relative;
+}
+
+/* Circle annotation - handwritten style */
+.rough-circle {
+  position: relative;
+  display: inline-block;
+  padding: 0 6px;
+}
+
+.rough-circle::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 2.5px solid #ef4444;
+  border-radius: 50%;
+  transform: rotate(-2deg);
+  filter: url(#rough-filter);
+  animation: rough-draw 0.5s ease-out forwards;
+}
+
+.rough-circle::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -2px;
+  right: -6px;
+  bottom: -5px;
+  border: 1.5px solid rgba(239, 68, 68, 0.4);
+  border-radius: 45% 55% 50% 50%;
+  transform: rotate(1deg);
+}
+
+/* Highlight annotation - handwritten highlighter effect */
+.rough-highlight {
+  background:
+    linear-gradient(
+      104deg,
+      rgba(254, 240, 138, 0) 0.9%,
+      rgba(254, 240, 138, 1) 2.4%,
+      rgba(254, 240, 138, 0.5) 5.8%,
+      rgba(254, 240, 138, 0.3) 93%,
+      rgba(254, 240, 138, 0.8) 96%,
+      rgba(254, 240, 138, 0) 98%
+    ),
+    linear-gradient(
+      183deg,
+      rgba(254, 240, 138, 0) 0%,
+      rgba(254, 240, 138, 0.4) 7.9%,
+      rgba(254, 240, 138, 0) 15%
+    );
+  padding: 0.1em 0.2em;
+  margin: 0 -0.2em;
+  border-radius: 0.2em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Box annotation - handwritten border effect */
+.rough-box {
+  position: relative;
+  display: inline-block;
+  padding: 2px 6px;
+}
+
+.rough-box::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -3px;
+  right: -3px;
+  bottom: -2px;
+  border: 2px solid #3b82f6;
+  border-radius: 2px;
+  transform: rotate(-0.5deg) skewX(-0.5deg);
+}
+
+.rough-box::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: -1px;
+  right: -5px;
+  bottom: -4px;
+  border: 1.5px solid rgba(59, 130, 246, 0.3);
+  border-radius: 1px;
+  transform: rotate(0.5deg);
+}
+
+/* Underline annotation - handwritten wavy line effect */
+.rough-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.rough-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 4px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4'%3E%3Cpath d='M0 3 Q5 0 10 3 T20 3' stroke='%231e293b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
+    repeat-x;
+  background-size: 12px 4px;
+}
+
+.dark .rough-underline::after {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4'%3E%3Cpath d='M0 3 Q5 0 10 3 T20 3' stroke='%23e2e8f0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
+    repeat-x;
+  background-size: 12px 4px;
+}
+
+/* Dark mode for rough highlight */
+.dark .rough-highlight {
+  background:
+    linear-gradient(
+      104deg,
+      rgba(251, 191, 36, 0) 0.9%,
+      rgba(251, 191, 36, 0.4) 2.4%,
+      rgba(251, 191, 36, 0.2) 5.8%,
+      rgba(251, 191, 36, 0.15) 93%,
+      rgba(251, 191, 36, 0.35) 96%,
+      rgba(251, 191, 36, 0) 98%
+    ),
+    linear-gradient(
+      183deg,
+      rgba(251, 191, 36, 0) 0%,
+      rgba(251, 191, 36, 0.2) 7.9%,
+      rgba(251, 191, 36, 0) 15%
+    );
+}
+
+/* Bracket annotation - handwritten bracket effect */
+.rough-bracket {
+  display: inline;
+}
+
+.rough-bracket-container {
+  position: relative;
+  padding-left: 16px;
+  margin-left: 4px;
+}
+
+.rough-bracket-container::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -4px;
+  bottom: -4px;
+  width: 10px;
+  border-left: 3px solid #8b5cf6;
+  border-top: 3px solid #8b5cf6;
+  border-bottom: 3px solid #8b5cf6;
+  border-radius: 4px 0 0 4px;
+  transform: scaleX(0.6);
+  transform-origin: left center;
+}
+
+/* Bracket style when used directly as inline element */
+span.rough-bracket {
+  border-left: 3px solid #8b5cf6;
+  padding-left: 8px;
+  margin-left: 4px;
+  display: inline;
+  position: relative;
+}
+
+span.rough-bracket::before {
+  content: "";
+  position: absolute;
+  left: -3px;
+  top: -2px;
+  width: 8px;
+  height: 3px;
+  border-left: 3px solid #8b5cf6;
+  border-top: 3px solid #8b5cf6;
+  border-radius: 3px 0 0 0;
+}
+
+span.rough-bracket::after {
+  content: "";
+  position: absolute;
+  left: -3px;
+  bottom: -2px;
+  width: 8px;
+  height: 3px;
+  border-left: 3px solid #8b5cf6;
+  border-bottom: 3px solid #8b5cf6;
+  border-radius: 0 0 0 3px;
+}
+
+/* Hand-drawn effect animation */
+@keyframes rough-draw {
+  from {
+    stroke-dashoffset: 100;
+    opacity: 0;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+/* Simplified styles for PDF export */
+@media print {
+  .rough-circle::before,
+  .rough-circle::after,
+  .rough-box::before,
+  .rough-box::after,
+  .rough-underline::after,
+  .rough-bracket-container::before {
+    filter: none;
+    animation: none;
+  }
+}
+
+/* ── Gemini / NotebookLM Style Enhancements ─────────────────────── */
+
+/* Slide-in animation for Studio panel */
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.2s ease-out forwards;
+}
+
+/* Subtle scale-up for cards on hover */
+@keyframes scale-up {
+  from {
+    transform: scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-scale-up {
+  animation: scale-up 0.15s ease-out forwards;
+}
+
+/* Gemini-style gradient text */
+.gemini-gradient-text {
+  background: linear-gradient(135deg, #4285f4 0%, #9b72cb 25%, #d96570 50%, #d96570 75%, #4285f4 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gemini-style input glow */
+.gemini-input-glow:focus-within {
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.15), 0 4px 16px rgba(66, 133, 244, 0.1);
+}
+
+/* Studio panel scrollbar */
+.studio-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.studio-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.studio-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 2px;
+}
+
+.studio-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+/* Glass morphism effect for panels */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.8);
+}
+
+/* ── New UI Animations ─────────────────────── */
+
+/* Float animation for logo */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Shimmer effect for gradients */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Pulse ring animation */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* Slide up animation */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s ease-out forwards;
+}
+
+/* Stagger children animation */
+@keyframes stagger-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-stagger-1 { animation: stagger-fade-in 0.4s ease-out 0.1s forwards; opacity: 0; }
+.animate-stagger-2 { animation: stagger-fade-in 0.4s ease-out 0.2s forwards; opacity: 0; }
+.animate-stagger-3 { animation: stagger-fade-in 0.4s ease-out 0.3s forwards; opacity: 0; }
+.animate-stagger-4 { animation: stagger-fade-in 0.4s ease-out 0.4s forwards; opacity: 0; }
+
+/* Bounce subtle animation */
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+/* Glow effect */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
+  }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Rotate slow animation */
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 8s linear infinite;
+}
+
+/* Scale pulse animation */
+@keyframes scale-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-scale-pulse {
+  animation: scale-pulse 2s ease-in-out infinite;
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Custom scrollbar */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 2px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+/* Focus visible styles */
+.focus-visible-ring:focus-visible {
+  outline: none;
+  --tw-ring-offset-width: 2px;
+  --tw-ring-color: rgb(59 130 246);
+  box-shadow: 0 0 0 2px var(--tw-ring-color);
+}
+
+/* Transition utilities */
+.transition-transform-opacity {
+  transition-property: transform, opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Hover lift effect */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient border effect */
+.gradient-border {
+  position: relative;
+  background: linear-gradient(to right, white, white);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+/* Text gradient animation */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-text {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}

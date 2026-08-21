@@ -1,0 +1,9 @@
+PyMuPDF>=1.23.0
+rapidocr>=3.6.0
+mineru>=2.0.0
+opencv-python>=4.9.0
+opencv-python-headless>=4.9.0
+pillow>=10.0.0
+scikit-image>=0.26.0
+albumentations>=2.0.0
+tifffile>=2024.0.0

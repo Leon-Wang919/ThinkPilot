@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements/base.txt
+            requirements/dev.txt
+      - name: Install Python dependencies
+        run: pip install -r requirements/base.txt -r requirements/dev.txt
+      - name: Lint Python
+        run: |
+          python -m ruff check src/api/main.py src/api/utils/health.py src/api/routers/agent_config.py src/api/routers/chat.py src/api/routers/config.py src/api/routers/dashboard.py src/api/routers/knowledge.py src/api/routers/notebook.py src/api/routers/settings.py src/api/routers/solve.py src/api/routers/system.py src/services/__init__.py src/services/setup scripts/dev.py scripts/healthcheck_startup.py scripts/start_web.py tests
+          python -m black --check src/api/main.py src/api/utils/health.py src/api/routers/agent_config.py src/api/routers/chat.py src/api/routers/config.py src/api/routers/dashboard.py src/api/routers/knowledge.py src/api/routers/notebook.py src/api/routers/settings.py src/api/routers/solve.py src/api/routers/system.py src/services/__init__.py src/services/setup scripts/dev.py scripts/healthcheck_startup.py scripts/start_web.py tests
+      - name: Test Python
+        run: python -m pytest -q
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Install frontend dependencies
+        run: npm ci
+      - name: Lint frontend
+        run: npm run lint
+      - name: Check translations
+        run: npm run i18n:check
+      - name: Build frontend
+        run: npm run build
+

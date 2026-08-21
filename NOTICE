@@ -1,0 +1,19 @@
+ThinkPilot
+Copyright (C) 2026 Leon-Wang919
+
+ThinkPilot is a modified derivative of DeepTutor v0.2.0:
+https://github.com/HKUDS/DeepTutor/tree/v0.2.0
+
+DeepTutor v0.2.0 was distributed under the GNU Affero General Public
+License, version 3. Copyright in the original portions remains with the
+original DeepTutor authors and contributors.
+
+ThinkPilot includes modifications to the branding, backend and frontend,
+agent workflows, subject routing, tests, documentation, and project
+configuration. Those modifications are documented in MODIFICATIONS.md.
+
+ThinkPilot is not affiliated with or endorsed by HKUDS or the Data
+Intelligence Lab at The University of Hong Kong.
+
+This notice is informational and does not replace or modify the terms in
+the LICENSE file.
