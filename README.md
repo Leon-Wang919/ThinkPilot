@@ -5,28 +5,37 @@
 <h1 align="center">ThinkPilot</h1>
 
 <p align="center">
-  面向真实学习流程的多智能体 AI 辅导平台
+  覆盖解题、错题复习与费曼检验的多智能体全流程学习平台
 </p>
 
-ThinkPilot 将“直接给答案”扩展为完整的学习闭环：按学科组织上下文，通过 Teacher 智能体讲解与追问，结合分步解题、费曼评估、笔记和知识库检索，帮助学习者理解、表达并复盘知识。
+ThinkPilot 不是只给答案的问答工具，而是把多个智能体串联成可持续的学习闭环。用户从一道不会的问题开始，经过智能解题、错题沉淀与针对性复习，最后通过费曼讲解检验自己是否真正掌握。
 
 > ThinkPilot 是基于 [HKUDS/DeepTutor v0.2.0](https://github.com/HKUDS/DeepTutor/tree/v0.2.0) 修改开发的衍生项目，并依照 GNU Affero General Public License v3.0 发布。
 
+## 完整学习闭环
+
+`不会的问题 → 多智能体协作解题 → 加入错题本 → Agent 制定复习计划 → 费曼讲解 → 掌握度评估`
+
+1. **智能解题**：多个智能体分工完成问题分析、资料检索、推理求解与结果验证，输出可理解、可追踪的分步答案。
+2. **错题复习**：将典型错题或仍未掌握的问题沉淀到错题本；Agent 分析薄弱知识点与错误原因，制定针对性复习计划并陪伴复习。
+3. **费曼验收**：用户作为老师向扮演学生的 Agent 讲解知识；Agent 通过提问和追问检查理解，并从准确性、完整性与表达清晰度评估掌握程度，指出仍需补强的部分。
+
 ## 核心能力
 
+- **多智能体协作**：分析、检索、求解、验证和教学评估等角色围绕同一学习目标协同工作。
 - **学科路由**：支持文科、理科和工科上下文，并为不同学科加载独立配置。
-- **Teacher 智能体**：在讲解、分步解题和苏格拉底式追问之间编排学习流程。
-- **费曼评估**：让学习者复述知识，再根据完整性、准确性和表达质量获得反馈。
-- **知识库与笔记**：导入参考材料，按学科检索，并把关键内容沉淀到笔记本。
-- **完整前后端**：FastAPI 提供 API 与流式交互，Next.js 提供响应式学习界面。
+- **RAG 知识增强**：导入学习材料后完成解析、分块、索引与检索，让讲解和复习建立在个人知识库之上。
+- **学习资产沉淀**：统一管理错题本、笔记、知识库与学习记录，让一次提问转化为可持续复习的材料。
+- **流式全栈体验**：FastAPI 提供 API 与流式交互，Next.js 提供响应式学习界面。
 - **多提供商配置**：支持通过环境变量配置 LLM、Embedding、搜索与 TTS 服务。
 
 ## 技术栈
 
-- 后端：Python 3.10+、FastAPI、LangGraph、SQLAlchemy
-- 前端：Next.js 16、React 19、TypeScript、Tailwind CSS
-- 数据：SQLite、本地知识库与用户运行数据
-- 工程化：Pytest、Ruff、Black、ESLint、Prettier、Docker Compose
+- **智能体与模型**：Python 3.10+、LangGraph、多智能体工作流；支持 OpenAI、Anthropic、Google GenAI、DashScope 等模型接口
+- **后端与数据**：FastAPI、Uvicorn、WebSocket、Pydantic、SQLAlchemy、SQLite / aiosqlite
+- **RAG 与文档知识库**：LightRAG、LlamaIndex、RAG-Anything、Docling；支持稠密、混合与图检索，以及固定、语义和编号分块
+- **前端**：Next.js 16、React 19、TypeScript、Tailwind CSS、i18next
+- **工程化**：Pytest、Ruff、Black、ESLint、Prettier、Docker Compose、GitHub Actions
 
 ## 快速开始
 
