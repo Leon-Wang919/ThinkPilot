@@ -20,6 +20,20 @@ ThinkPilot 不是只给答案的问答工具，而是把多个智能体串联成
 2. **错题复习**：将典型错题或仍未掌握的问题沉淀到错题本；Agent 分析薄弱知识点与错误原因，制定针对性复习计划并陪伴复习。
 3. **费曼验收**：用户作为老师向扮演学生的 Agent 讲解知识；Agent 通过提问和追问检查理解，并从准确性、完整性与表达清晰度评估掌握程度，指出仍需补强的部分。
 
+### 页面展示
+
+#### 智能解题
+
+![ThinkPilot 智能解题页面](docs/images/intelligent-solving.jpg)
+
+#### 错题复习
+
+![ThinkPilot 错题复习页面](docs/images/wrong-question-review.jpg)
+
+#### 费曼评估
+
+![ThinkPilot 费曼评估页面](docs/images/feynman-assessment.jpg)
+
 ## 核心能力
 
 - **多智能体协作**：分析、检索、求解、验证和教学评估等角色围绕同一学习目标协同工作。
