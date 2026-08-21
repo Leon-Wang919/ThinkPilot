@@ -42,7 +42,7 @@ ThinkPilot 不是只给答案的问答工具，而是把多个智能体串联成
 ### 1. 获取代码并准备配置
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/Leon-Wang919/ThinkPilot.git
 cd ThinkPilot
 cp .env.example .env
 ```
